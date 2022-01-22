@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, '../src/lib/index.ts'),
+      entry: path.resolve(__dirname, './src/lib/index.ts'),
       name: 'animate-number',
       fileName: (format) => {
         let fileEnd = 'js'
@@ -18,5 +18,9 @@ export default defineConfig({
         return `index.${fileEnd}`
       },
     },
+  },
+
+  test: {
+    environment: 'happy-dom',
   },
 })
