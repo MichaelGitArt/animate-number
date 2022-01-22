@@ -16,30 +16,38 @@ export const animateUsingInterval = ({
   fps = defaults.FPS,
   bezier = defaults.BEZIER,
   on,
+  completed,
+  stopped,
+  done,
 }: IAnimateByIntervalParams): StopAnimationFn => {
   const easingFn = BezierEasing(...bezier)
   const difference = to - from
 
   const frames = Math.round(duration / (1000 / fps))
-  console.log('frames', frames)
   let frame = 1
+  let currentValue = from
 
   const intervalId = setInterval(() => {
     let progress = frame / frames
     if (progress > 1)
       progress = 1
 
-    const value = from + (difference * easingFn(progress))
-    on(value)
+    currentValue = from + (difference * easingFn(progress))
+    on(currentValue)
 
-    if (progress === 1)
+    if (progress === 1) {
       clearInterval(intervalId)
+      completed?.(currentValue)
+      done?.(currentValue)
+    }
 
     frame++
   }, duration / frames)
 
   return () => {
     clearInterval(intervalId)
+    stopped?.(currentValue)
+    done?.(currentValue)
   }
 }
 
@@ -52,23 +60,30 @@ export const animateUsingRAF = ({
   duration,
   bezier = defaults.BEZIER,
   on,
+  completed,
+  stopped,
+  done,
 }: IParams): StopAnimationFn => {
   const easingFn = BezierEasing(...bezier)
   const difference = to - from
 
   const timestamp = Date.now()
   let rqfId = 0
+  let currentValue = from
 
   const fn = () => {
     let progress = (Date.now() - timestamp) / duration
     if (progress > 1)
       progress = 1
 
-    const value = from + (difference * easingFn(progress))
-    on(value)
+    currentValue = from + (difference * easingFn(progress))
+    on(currentValue)
 
-    if (progress === 1)
+    if (progress === 1) {
+      completed?.(currentValue)
+      done?.(currentValue)
       return
+    }
 
     rqfId = requestAnimationFrame(fn)
   }
@@ -77,6 +92,8 @@ export const animateUsingRAF = ({
 
   return () => {
     cancelAnimationFrame(rqfId)
+    stopped?.(currentValue)
+    done?.(currentValue)
   }
 }
 
