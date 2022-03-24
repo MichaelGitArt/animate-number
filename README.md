@@ -1,8 +1,9 @@
 # Animate Number
 
-A simple utility to animate a single number.
+A simple utility to animate a single number. The number changes on each frame (by requestAnimationFrame).
 
-For more complex cases you can take a look at the [shifty](https://www.npmjs.com/package/shifty). The package can animate a few fields and control the animation timelines.
+For more complex cases, you can take a look at the [shifty](https://www.npmjs.com/package/shifty).
+The package can animate a few fields and control the animation timelines.
 
 ## Usage
 
@@ -23,8 +24,7 @@ animate({
 
 ```ts
 type Animate = (
-  params: IParams | IAnimateByIntervalParams,
-  type: 'raf' | 'interval' = 'raf'
+  params: IParams,
 ): StopAnimationFn
 ```
 
@@ -51,7 +51,7 @@ interface IParams {
   bezier?: BezierParams
 
   /**
-   * a callback that is called many times until the animation is complete.
+   * a callback called many times (on requestAnimationFrame) until the animation is complete.
    * the current progress is passed as the first parameter.
    */
   on: (value: CurrentValue) => void
