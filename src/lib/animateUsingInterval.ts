@@ -1,32 +1,34 @@
+
 import BezierEasing from 'bezier-easing'
 
 // types
-import type { IParams, StopAnimationFn } from './types'
+import type { IAnimateByIntervalParams, StopAnimationFn } from './types'
 
 import { defaults } from './config'
 
 /**
- * animate number using `requestAnimationFrame`
+ * animate number using `setInterval`
  */
-export const animate = ({
+export const animateUsingInterval = ({
   from,
   to,
   duration,
+  fps = defaults.FPS,
   bezier = defaults.BEZIER,
   on,
   completed,
   stopped,
   done,
-}: IParams): StopAnimationFn => {
+}: IAnimateByIntervalParams): StopAnimationFn => {
   const easingFn = BezierEasing(...bezier)
   const difference = to - from
 
-  const timestamp = Date.now()
-  let rqfId = 0
+  const frames = Math.round(duration / (1000 / fps))
+  let frame = 1
   let currentValue = from
 
-  const fn = () => {
-    let progress = (Date.now() - timestamp) / duration
+  const intervalId = setInterval(() => {
+    let progress = frame / frames
     if (progress > 1)
       progress = 1
 
@@ -34,18 +36,16 @@ export const animate = ({
     on(currentValue)
 
     if (progress === 1) {
+      clearInterval(intervalId)
       completed?.(currentValue)
       done?.(currentValue)
-      return
     }
 
-    rqfId = requestAnimationFrame(fn)
-  }
-
-  rqfId = requestAnimationFrame(fn)
+    frame++
+  }, duration / frames)
 
   return () => {
-    cancelAnimationFrame(rqfId)
+    clearInterval(intervalId)
     stopped?.(currentValue)
     done?.(currentValue)
   }
