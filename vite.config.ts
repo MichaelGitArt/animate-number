@@ -3,6 +3,8 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   build: {
+    sourcemap: true,
+
     lib: {
       entry: path.resolve(__dirname, './src/lib/index.ts'),
       name: 'animate-number',
