@@ -5,6 +5,8 @@ A simple utility to animate a single number. The number changes on each frame (b
 For more complex cases, you can take a look at the [shifty](https://www.npmjs.com/package/shifty).
 The package can animate a few fields and control the animation timelines.
 
+🤯 [Demo](https://stackblitz.com/edit/gitart-animate-number-playground?file=src%2Fmain.ts&terminal=dev)
+
 ## Usage
 
 ### `animate`
