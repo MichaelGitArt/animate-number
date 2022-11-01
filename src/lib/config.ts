@@ -1,6 +1,8 @@
 import type { BezierParams } from './types'
 
-export const easingTypes: Record<string, BezierParams> = {
+export type EasingTypes = 'ease' | 'easeIn' | 'easeOut' | 'easeInOut' | 'linear' | 'default'
+
+export const easingTypes: Record<EasingTypes, BezierParams> = {
   ease: [0.25, 0.1, 0.25, 1],
   linear: [0, 0, 1, 1],
   easeIn: [0.42, 0, 1, 1],
