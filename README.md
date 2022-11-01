@@ -7,10 +7,14 @@ The package can animate a few fields and control the animation timelines.
 
 ## Usage
 
+### `animate`
+
+`animate` works with `requestAnimationFrame` and changes the number on each frame.
+
 ```ts
 import { animate } from '@gitart/animate-number'
 
-animate({
+const stopFn = animate({
   from: 0,
   to: 500,
   duration: 1000,
@@ -18,14 +22,41 @@ animate({
     console.log('value: ', value)
   },
 }
+
+// stop animation if needed
+stopFn()
 ```
 
-## Types
+### `animateUsingInterval`
+
+`animateUsingInterval` works with `setInterval` and changes the number on each interval. Specify the interval by `fps` option.
 
 ```ts
-type Animate = (
+import { animateUsingInterval } from '@gitart/animate-number'
+
+const stopFn = animate({
+  from: 0,
+  to: 500,
+  duration: 1000,
+  fps: 60,
+  on: (value) => {
+    console.log('value: ', value)
+  },
+}
+```
+
+
+## Details
+
+### `animate`
+
+`animate` works with `requestAnimationFrame` and changes the number on each frame.
+perfect for browser environment.
+
+```ts
+type AnimateFn = (
   params: IParams,
-): StopAnimationFn
+) => StopAnimationFn
 ```
 
 ```ts
@@ -73,5 +104,26 @@ interface IParams {
    * @param value - last value passed to `on` callback
    */
   done?: (value: CurrentValue) => void
+}
+```
+
+### `animateUsingInterval`
+
+`animateUsingInterval` works with `setInterval` and changes the number on each interval. To specify the interval, use the `fps` option.
+
+```ts
+type AnimateByIntervalFn = (
+  params: IParams,
+) => StopAnimationFn
+```
+
+```ts
+interface IAnimateByIntervalParams extends IParams {
+  /**
+   * frames per second
+   * default: 60
+   * @example 10 means that the animation will be updated 10 times per second
+   */
+  fps?: number
 }
 ```

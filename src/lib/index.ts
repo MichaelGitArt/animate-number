@@ -1,4 +1,10 @@
-export type { IParams, IAnimateByIntervalParams, BezierParams } from './types'
+export type {
+  IParams,
+  IAnimateByIntervalParams,
+  BezierParams,
+  AnimateByIntervalFn,
+  AnimateFn,
+} from './types'
 
 export { animateUsingInterval } from './animateUsingInterval'
 

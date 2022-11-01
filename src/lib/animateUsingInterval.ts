@@ -2,14 +2,14 @@
 import BezierEasing from 'bezier-easing'
 
 // types
-import type { IAnimateByIntervalParams, StopAnimationFn } from './types'
+import type { AnimateByIntervalFn, IAnimateByIntervalParams, StopAnimationFn } from './types'
 
 import { defaults } from './config'
 
 /**
  * animate number using `setInterval`
  */
-export const animateUsingInterval = ({
+export const animateUsingInterval: AnimateByIntervalFn = ({
   from,
   to,
   duration,

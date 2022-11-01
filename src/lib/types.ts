@@ -50,9 +50,17 @@ export interface IParams {
   done?: (value: CurrentValue) => void
 }
 
+export type AnimateFn = (
+  params: IParams,
+) => StopAnimationFn
+
 export interface IAnimateByIntervalParams extends IParams {
   /**
    * frames per second
    */
   fps?: number
 }
+
+export type AnimateByIntervalFn = (
+  params: IParams,
+) => StopAnimationFn

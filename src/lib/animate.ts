@@ -1,14 +1,14 @@
 import BezierEasing from 'bezier-easing'
 
 // types
-import type { IParams, StopAnimationFn } from './types'
+import type { AnimateFn, IParams, StopAnimationFn } from './types'
 
 import { defaults } from './config'
 
 /**
  * animate number using `requestAnimationFrame`
  */
-export const animate = ({
+export const animate: AnimateFn = ({
   from,
   to,
   duration,
