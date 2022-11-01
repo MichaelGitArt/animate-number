@@ -45,6 +45,32 @@ const stopFn = animate({
 }
 ```
 
+### easingTypes
+
+You can specify `bezier` options by yourselft or use the `easingTypes`.
+There is this types of easing:
+
+```ts
+type EasingTypes = 'ease' | 'easeIn' | 'easeOut' | 'easeInOut' | 'linear' | 'default'
+```
+[(source)](https://github.com/MichaelGitArt/animate-number/blob/main/src/lib/config.ts)
+
+Usage:
+
+```ts
+import { animate, easingTypes } from '@gitart/animate-number'
+
+const stopFn = animate({
+  from: 0,
+  to: 500,
+  duration: 1000,
+  easing: easingTypes.easeInOut, // the same like [0.42, 0, 0.58, 1]
+  on: (value) => {
+    console.log('value: ', value)
+  },
+}
+```
+
 
 ## Details
 
