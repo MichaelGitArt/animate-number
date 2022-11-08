@@ -14,7 +14,7 @@ The package can animate a few fields and control the animation timelines.
 `animate` works with `requestAnimationFrame` and changes the number on each frame.
 
 ```ts
-import { animate } from '@gitart/animate-number'
+import { animate } from 'gitart-animate-number'
 
 const stopFn = animate({
   from: 0,
@@ -34,7 +34,7 @@ stopFn()
 `animateUsingInterval` works with `setInterval` and changes the number on each interval. Specify the interval by `fps` option.
 
 ```ts
-import { animateUsingInterval } from '@gitart/animate-number'
+import { animateUsingInterval } from 'gitart-animate-number'
 
 const stopFn = animate({
   from: 0,
@@ -60,7 +60,7 @@ type EasingTypes = 'ease' | 'easeIn' | 'easeOut' | 'easeInOut' | 'linear' | 'def
 Usage:
 
 ```ts
-import { animate, easingTypes } from '@gitart/animate-number'
+import { animate, easingTypes } from 'gitart-animate-number'
 
 const stopFn = animate({
   from: 0,
