@@ -1,6 +1,6 @@
 {
   "name": "gitart-animate-number",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Animate number changes. Lightweight and easy to use. Bezier curves, easing functions, and more.",
   "keywords": [
     "gitart",
@@ -22,20 +22,21 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite --config src/dev/vite.config.ts",
     "build": "tsc && vite build && tsc",
     "lint": "eslint .",
     "test": "vitest"
   },
-  "types": "dist/index.d.ts",
   "dependencies": {
     "bezier-easing": "^2.1.0"
   },
